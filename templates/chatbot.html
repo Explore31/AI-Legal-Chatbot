@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Legal Assistant Chatbot
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<style>
+    .chat-container {
+        background-color: rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    .user-query,
+    .bot-response {
+        margin-bottom: 10px;
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .user-query {
+        background-color: #ffffff66;
+        color: #fff;
+    }
+
+    .bot-response {
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: rgba(102, 64, 7, 0.3);
+    color: #fff;
+    padding: 15px;
+    overflow-wrap: break-word;
+    white-space: pre-line; /* Preserve original alignment */
+}
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    .input-group {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px); /* Apply blur effect */
+    border-radius: 20px;
+    padding: 5px;
+    }
+
+    .form-control {
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Translucent border */
+    background: transparent;
+    width: calc(100% - 60px); /* Adjust width for send button */
+    color: white; /* Text color white */
+    border-radius: 30px; /* Increase border radius */
+    padding: 8px; /* Add padding for better appearance */
+    transition: border-color 0.3s ease; /* Smooth transition for border color change */
+}
+
+.form-control:focus {
+    border-color: #ffffff9c; /* Border color on focus */
+}
+
+
+    .send-btn {
+        background-color: #c48313;
+        color: #fff;
+        border: none;
+        border-radius: 20px;
+        padding: 8px 20px;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+
+    .send-btn:hover {
+        background-color: #51300679;
+    }
+
+    .send-btn.hide {
+        display: none;
+    }
+
+
+    /* .form-control {
+        border-radius: 20px;
+        padding-right: 50px;
+    } */
+
+    .loading-text {
+        font-style: italic;
+        color: #4afa93;
+    }
+    .footer {
+        background-color: #343a40; /* Change background color */
+        color: #ffffff; /* Change text color */
+        padding: 20px 0; /* Adjust padding */
+        margin-top: auto; /* Ensure footer sticks to the bottom */
+        text-align: center; /* Center-align text */
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-11 offset-md-1">
+            <h1 class="text-center" style="color: #ffffff;">Get your Queries answered!</h1>
+            <div class="chat-container">
+                <form id="chat-form" method="POST">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="description" name="description" placeholder="Enter your Query" required>
+                            <button type="submit" class="btn btn-primary send-btn">Send</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+      $('.input-group').on('click', function() {
+        $('.send-btn').removeClass('hide');
+      });
+        $('#chat-form').on('submit', function(e) {
+            e.preventDefault();
+            let description = $('#description').val();
+            $.ajax({
+                url: '/chatbot',
+                method: 'POST',
+                data: { description: description },
+                beforeSend: function() {
+                // Display "Generating..." text below the input space
+                $('.chat-container').after('<p class="loading-text">Generating...</p>');
+                },
+                success: function(response) {
+                    // Remove "Generating..." text
+                    $('.loading-text').remove();
+                    // Append user's query
+                    let userQuery = '<p class="user-query">' + description + '</p>';
+                    $('#chat-form').before(userQuery);
+                    // Append bot's response
+                    let botResponse = '<div class="bot-response"><div class="response-content">' + response + '</div></div>';
+                    $('#chat-form').before(botResponse);
+                    // Clear input field
+                    $('#description').val('');
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

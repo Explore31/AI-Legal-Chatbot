@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Legal Chatbot - Home
+{% endblock %}
+
+{% block content %}
+<style>
+    /* Basic Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #5D5C61;
+      color: #fff;
+    }
+
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      padding: 30px 0;
+    }
+
+    /* Header Styles */
+    .header {
+      background-color: #2b2a2f;
+      padding: 10px 0;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .navbar {
+      float: right;
+    }
+
+    .navbar ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar ul li {
+      display: inline-block;
+      margin-left: 20px;
+    }
+
+    .navbar ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    /* Hero Section Styles */
+    .hero {
+      background-image: url("static/image1.jpg"); /* Replace 'hero-background.jpg' with your image file */
+      background-size: cover;
+      background-position: center;
+      padding: 100px 0;
+      text-align: center;
+      color: #fff;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 40px;
+    }
+
+    .btn-get-started {
+      display: inline-block;
+      background-color: #e38a14;
+      color: #fff;
+      padding: 10px 30px;
+      border-radius: 25px;
+      font-size: 18px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-get-started:hover {
+      background-color: rgba(119, 62, 8, 0.245);
+    }
+
+    /* Footer Styles */
+
+    .footer p {
+      margin: 0;
+    }
+
+    .footer a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fadeInUp {
+      animation: fadeInUp 1s ease-out;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section class="hero fadeInUp">
+    <div class="container">
+      <h1>Your friendly legal Assistant</h1>
+      <p>Get legal advice and answers to your legal questions instantly!</p>
+      <a href="/chatbot" class="btn-get-started">Start Chatting</a>
+    </div>
+  </section>
+{% endblock %}
