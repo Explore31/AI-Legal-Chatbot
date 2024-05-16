@@ -7,10 +7,10 @@ import hashlib
 from flask import Flask, render_template, request, redirect, url_for, session
 
 app = Flask(__name__)
-app.secret_key = "0340d9058c3b6762658b67815b8f256f048a3713c083f8e07b8026c2efcd58fd"  # Needed for session management run the session.py to generate the session management seceret key from your local machine
+app.secret_key = "Generate Session Management key using session.py"  # Needed for session management run the session.py to generate the session management seceret key from your local machine
 
 # Configure GenerativeAI API key
-genai.configure(api_key="AIzaSyCF_2eM5dqvDbDjndazATvTJNilGyTVPnY") #Your Api Key
+genai.configure(api_key="Your Api Key") #Your Api Key
 
 def load_legal_data_from_csv(filename):
     legal_data = []
