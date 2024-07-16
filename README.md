@@ -1,4 +1,4 @@
-# Legal Assistant Chatbot
+# Legal Assistant Chatbot - LegalAI
 
     Welcome to the Legal Assistant Chatbot project! This project aims to provide users with instant legal advice and answers to their legal queries through a user-friendly chat interface.
 
